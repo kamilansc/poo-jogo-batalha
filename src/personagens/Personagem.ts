@@ -20,6 +20,14 @@ export default class Personagem {
         return this._historico;
     }
 
+    get ataque(): number {
+        return this._ataque;
+    }
+
+    get vida(): number {
+        return this._vida
+    }
+
     validarVida(vida: number) {
         if (vida >= 0 && vida <= 100) {
             return vida;
