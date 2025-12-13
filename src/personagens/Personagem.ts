@@ -1,3 +1,5 @@
+import Acao from "../batalha/Acao";
+
 export default class Personagem {
     private _id: number;
     private _nome: string;
@@ -13,6 +15,11 @@ export default class Personagem {
         this._historico = [];
     }
 
+    /* ======== GETs e SETs ======== */
+    get historico(): Acao[] {
+        return this._historico;
+    }
+
     validarVida(vida: number) {
         if (vida >= 0 && vida <= 100) {
             return vida;
@@ -23,6 +30,7 @@ export default class Personagem {
     /* ======== FUNCIONALIDADES ======== */ 
     atacar(alvo: Personagem): Acao {
         alvo.receberDano(this._ataque);
+        return new Acao(1, this, alvo, "ATAQUE", this._ataque);
     }
 
     receberDano(valor: number): void {
