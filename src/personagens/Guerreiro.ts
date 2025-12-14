@@ -1,5 +1,6 @@
 import Personagem from "./Personagem";
 import Acao from "../batalha/Acao";
+import Mago from "./Mago";
 
 
 export default class Guerreiro extends Personagem {
@@ -15,21 +16,23 @@ export default class Guerreiro extends Personagem {
         return this._defesa;
     }
 
-    receberDano(valorAtaque: number): void {
-        if (valorAtaque < this.ataque) {
+    receberDano(dano: number, atacante: Personagem): void {
+        if (atacante instanceof Mago) {
+            this.vida -= dano;
             return;
         }
 
-        this._defesa -= valorAtaque;
+        if (dano < this.ataque) return;
+
+        this._defesa -= dano;
 
         if (this._defesa < 0) {
-            let restoataque = Math.abs(this._defesa);
+            const resto = Math.abs(this._defesa);
             this._defesa = 0;
-            super.receberDano(restoataque);
-
+            this.vida -= resto;
         }
-
     }
+
 
     calcularDano(): number {
         if (this.vida <= 100 * 0.3 ) {
