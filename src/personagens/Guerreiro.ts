@@ -7,8 +7,8 @@ export default class Guerreiro extends Personagem {
     private _defesa: number;
 
 
-    constructor(defesa: number, id: number, nome: string, vida: number, ataque: number ) {
-        super(id, nome, vida, ataque);
+    constructor(defesa: number, nome: string, vida: number, ataque: number ) {
+        super(nome, vida, ataque);
         this._defesa = defesa;
     }
 

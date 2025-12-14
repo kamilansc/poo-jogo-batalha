@@ -5,8 +5,8 @@ import Mago from "./Mago";
 export default class Arqueiro extends Personagem {
     private _ataqueMultiplo: number;
 
-    constructor(id: number, nome: string, vida: number, ataque: number, ataqueMultiplo: number) {
-        super(id, nome, vida, ataque);
+    constructor(nome: string, vida: number, ataque: number, ataqueMultiplo: number) {
+        super(nome, vida, ataque);
         this._ataqueMultiplo = ataqueMultiplo;
     }
 
