@@ -47,10 +47,6 @@ export default class Personagem {
         return this._ataque;
     }
 
-    calcularDano(): number {
-        return this._ataque;
-    }
-
     atacar(alvo: Personagem): Acao {
         if (!this.estaVivo()) {
             this.registrarAcao(new Acao(7, this, alvo, "ATAQUE_MORTO_ERRO", this._ataque));
