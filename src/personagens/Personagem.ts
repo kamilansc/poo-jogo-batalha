@@ -46,6 +46,10 @@ export default class Personagem {
         this._vida = vida;
     }
 
+    get nome(): string {
+        return this._nome;
+    }
+
     
     /* ======== FUNCIONALIDADES ======== */ 
     calcularDano(): number {
