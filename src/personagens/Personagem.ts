@@ -1,4 +1,5 @@
 import Acao from "../batalha/Acao";
+import PersonagemMortoError from "../excecoes/PersonagemMortoError";
 
 export default class Personagem {
     private _id: number;
@@ -29,6 +30,16 @@ export default class Personagem {
 
     /* ======== FUNCIONALIDADES ======== */ 
     atacar(alvo: Personagem): Acao {
+        if (!this.estaVivo()) {
+            this.registrarAcao(new Acao(7, this, alvo, "ATAQUE_MORTO_ERRO", this._ataque));
+            throw new PersonagemMortoError(`O personagem ${this._nome} está morto e não pode atacar.`)
+        }
+
+        if(!alvo.estaVivo()) {
+            this.registrarAcao(new Acao(8, this, alvo, "RECEBER_DANO_MORTO_ERRO", this._ataque));
+            throw new PersonagemMortoError(`O personagem ${alvo._nome} já está morto e não pode ser atacado.`)
+        }
+
         alvo.receberDano(this._ataque);
         return new Acao(1, this, alvo, "ATAQUE", this._ataque);
     }
