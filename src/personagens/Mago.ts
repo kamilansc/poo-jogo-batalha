@@ -1,6 +1,4 @@
 import Acao from "../batalha/Acao"; 
-import Arqueiro from "./Arqueiro"; 
-import Guerreiro from "./Guerreiro"; 
 import Personagem from "./Personagem"; 
 
 export default class Mago extends Personagem { 
