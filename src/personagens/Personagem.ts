@@ -22,6 +22,18 @@ export default class Personagem {
         return this._historico;
     }
 
+    get ataque(): number {
+        return this._ataque;
+    }
+
+    get vida(): number {
+        return this._vida
+    }
+
+    set vida(vida: number) {
+        this._vida = vida;
+    }
+
     
     /* ======== FUNCIONALIDADES ======== */ 
     validarVida(vida: number) {
@@ -29,6 +41,10 @@ export default class Personagem {
             return vida;
         }
         throw new Error("Vida inválida");
+    }
+
+    calcularDano(): number {
+        return this._ataque;
     }
 
     calcularDano(): number {
