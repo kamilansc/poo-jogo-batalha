@@ -1,5 +1,6 @@
 import Acao from "../batalha/Acao";
 import Personagem from "./Personagem";
+import Mago from "./Mago";
 
 export default class Arqueiro extends Personagem {
     private _ataqueMultiplo: number;
@@ -9,13 +10,23 @@ export default class Arqueiro extends Personagem {
         this._ataqueMultiplo = ataqueMultiplo;
     }
 
-   calcularDano(): number {
-
-        if (Math.random() > 0.5) {
-            return this.ataque * this._ataqueMultiplo;
+    receberDano(dano: number, atacante: Personagem): void {
+        if (atacante instanceof Mago) {
+            super.receberDano(dano * 2, atacante);
+            return;
         }
 
-        return this.ataque
+        super.receberDano(dano, atacante);
+        }
 
+
+    calcularDano(): number {
+
+    if (Math.random() > 0.5) {
+
+        return this.ataque * this._ataqueMultiplo;
+    }
+
+    return this.ataque;
     }
 }
