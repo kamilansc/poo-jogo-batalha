@@ -1,6 +1,6 @@
 import Acao from "../batalha/Acao";
-
-import PersonagemMortoError from "../excecoes/PersonagemMortoError"
+import PersonagemAutoataqueError from "../excecoes/PersonagemAutoataqueError";
+import PersonagemMortoError from "../excecoes/PersonagemMortoError";
 
 export default class Personagem {
     private _id: number;
@@ -34,6 +34,8 @@ export default class Personagem {
         this._vida = vida;
     }
 
+    
+    /* ======== FUNCIONALIDADES ======== */ 
     validarVida(vida: number) {
         if (vida >= 0 && vida <= 100) {
             return vida;
@@ -41,7 +43,10 @@ export default class Personagem {
         throw new Error("Vida inválida");
     }
 
-    /* ======== FUNCIONALIDADES ======== */ 
+    calcularDano(): number {
+        return this._ataque;
+    }
+
     atacar(alvo: Personagem): Acao {
         if (!this.estaVivo()) {
             this.registrarAcao(new Acao(7, this, alvo, "ATAQUE_MORTO_ERRO", this._ataque));
@@ -53,8 +58,18 @@ export default class Personagem {
             throw new PersonagemMortoError(`O personagem ${alvo._nome} já está morto e não pode ser atacado.`)
         }
 
+        if (this === alvo) {
+            this.registrarAcao(new Acao(9, this, alvo, "AUTOATAQUE_ERRO", this._ataque));
+            throw new PersonagemAutoataqueError(`Personagem ${this._nome} não pode atacar a si mesmo.`);
+        }
+
+        const dano: number = this.calcularDano();
         alvo.receberDano(this._ataque);
-        return new Acao(1, this, alvo, "ATAQUE", this._ataque);
+
+        const acao: Acao = new Acao(1, this, alvo, "ATAQUE", this._ataque);
+        this.registrarAcao(acao);
+
+        return acao;
     }
 
     receberDano(valor: number): void {
@@ -72,5 +87,11 @@ export default class Personagem {
 
     registrarAcao(acao: Acao): void {
         this._historico.push(acao);
+    }
+
+    exibirHistorico(): void {
+        for (const acao of this._historico) {
+            console.log(acao);
+        }
     }
 }
