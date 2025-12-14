@@ -7,6 +7,6 @@ Um jogo de batalha em TypeScript, desenvolvido em dupla, onde personagens com ha
 - 👩‍💻 Kamila Rocha do Nascimento
 - 👨‍💻 Mylena Duarte da Silva
 
-**Curso:** Análise e Desenvolvimento de Sistemas \\
-**Disciplina:** Programação Orientada a Objetos \\
-**Professor:** Ely \\
+**Curso:** Análise e Desenvolvimento de Sistemas \
+**Disciplina:** Programação Orientada a Objetos \
+**Professor:** Ely

@@ -1,5 +1,6 @@
 import Acao from "../batalha/Acao";
-import PersonagemMortoError from "../excecoes/PersonagemMortoError";
+
+import PersonagemMortoError from "../excecoes/PersonagemMortoError"
 
 export default class Personagem {
     private _id: number;
@@ -19,6 +20,18 @@ export default class Personagem {
     /* ======== GETs e SETs ======== */
     get historico(): Acao[] {
         return this._historico;
+    }
+
+    get ataque(): number {
+        return this._ataque;
+    }
+
+    get vida(): number {
+        return this._vida
+    }
+
+    set vida(vida: number) {
+        this._vida = vida;
     }
 
     validarVida(vida: number) {
