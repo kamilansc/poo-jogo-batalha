@@ -1,4 +1,5 @@
 import Acao from "../batalha/Acao";
+import { PersonagemMortoError } from "../excecoes/PersonagemMortoError";
 
 export default class Personagem {
     private _id: number;
@@ -28,6 +29,10 @@ export default class Personagem {
         return this._vida
     }
 
+    set vida(vida: number) {
+        this._vida = vida;
+    }
+
     validarVida(vida: number) {
         if (vida >= 0 && vida <= 100) {
             return vida;
@@ -37,6 +42,9 @@ export default class Personagem {
 
     /* ======== FUNCIONALIDADES ======== */ 
     atacar(alvo: Personagem): Acao {
+        if (!this.estaVivo()) {
+            throw new 
+        }
         alvo.receberDano(this._ataque);
         return new Acao(1, this, alvo, "ATAQUE", this._ataque);
     }
