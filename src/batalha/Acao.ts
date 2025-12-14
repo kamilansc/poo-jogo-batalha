@@ -1,7 +1,8 @@
+import IdJaExisteError from "../excecoes/IdJaExisteError";
 import Personagem from "../personagens/Personagem";
 
 export default class Acao {
-    private _id: number;
+    private _id!: number;
     private _origem: Personagem;
     private _alvo: Personagem;
     private _descricao: string;
@@ -12,9 +13,8 @@ export default class Acao {
     private _vidaOrigemNoMomento: number;
     private _vidaAlvoNoMomento: number;
 
-    constructor(id: number, origem: Personagem, alvo: Personagem, descricao: string, valorDano: number) {
+    constructor(origem: Personagem, alvo: Personagem, descricao: string, valorDano: number) {
         this._origem = origem;
-        this._id = id;
         this._alvo = alvo;
         this._descricao = descricao;
         this._valorDano = valorDano;
@@ -24,5 +24,18 @@ export default class Acao {
         // personagens no momento da ação.
         this._vidaOrigemNoMomento = origem.vida;
         this._vidaAlvoNoMomento = alvo.vida;
+    }
+
+    /* ========== GET E SET DO ID DEFINIDO EM BATALHA ========== */
+    set id(id: number) {
+        if (this._id !== undefined) {
+            throw new IdJaExisteError("ID da ação já definido.");
+        }
+
+        this._id = id;
+    }
+
+    get id(): number {
+        return this._id;
     }
 }
