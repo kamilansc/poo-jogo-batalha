@@ -29,6 +29,10 @@ export default class Personagem {
         return this._vida
     }
 
+    set vida(vida: number) {
+        this._vida = vida;
+    }
+
     validarVida(vida: number) {
         if (vida >= 0 && vida <= 100) {
             return vida;
