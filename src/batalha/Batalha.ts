@@ -1,3 +1,5 @@
+import BatalhaNaoFinalizadaError from "../excecoes/BatalhaNaoFinalizadaError";
+import NaoHaVencedorError from "../excecoes/NaoHaVencedorError";
 import PersonagemComMesmoNomeError from "../excecoes/PersonagemComMesmoNomeError";
 import PersonagemNaoEncontradoError from "../excecoes/PersonagemNaoEncontradoError";
 import Personagem from "../personagens/Personagem";
@@ -81,5 +83,27 @@ export default class Batalha {
         this._acoes.push(acao);
 
         return [acao];
+    }
+
+    listarPersonagens(): Personagem[] {
+        return this._personagens;
+    }
+
+    listarAcoes(): Acao[] {
+        return this._acoes;
+    }
+
+    verificarVencedor(): Personagem {
+        const vivos = this._personagens.filter(personagem => personagem.estaVivo());
+
+        if (vivos.length > 1) {
+            throw new BatalhaNaoFinalizadaError(
+            "A batalha ainda não terminou. Não é possível determinar o vencedor.")
+        }
+        if (vivos.length === 0) {
+            throw new NaoHaVencedorError("Não há personagens vivos na batalha.")
+        }
+
+        return vivos[0]!;
     }
 }
