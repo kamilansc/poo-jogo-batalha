@@ -69,7 +69,7 @@ export default class Personagem {
         }
 
         const dano: number = this.calcularDano();
-        alvo.receberDano(this._ataque);
+        alvo.receberDano(dano, this);
 
         const acao: Acao = new Acao(1, this, alvo, "ATAQUE", this._ataque);
         this.registrarAcao(acao);
@@ -77,9 +77,9 @@ export default class Personagem {
         return acao;
     }
 
-    receberDano(valor: number): void {
-        if (this._vida >= valor) {
-            this._vida -= valor;
+    receberDano(dano: number, atacante: Personagem): void {
+        if (this._vida >= dano) {
+            this._vida -= dano;
             return;
         }
         
