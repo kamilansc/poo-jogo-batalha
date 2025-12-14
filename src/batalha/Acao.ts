@@ -9,8 +9,8 @@ export default class Acao {
     private _dataHora: Date;
 
     constructor(id: number, origem: Personagem, alvo: Personagem, descricao: string, valorDano: number) {
-        this._id = id;
         this._origem = origem;
+        this._id = id;
         this._alvo = alvo;
         this._descricao = descricao;
         this._valorDano = valorDano;
