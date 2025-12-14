@@ -1,3 +1,5 @@
+import BatalhaNaoFinalizadaError from "../excecoes/BatalhaNaoFinalizadaError";
+import NaoHaVencedorError from "../excecoes/NaoHaVencedorError";
 import PersonagemComMesmoNomeError from "../excecoes/PersonagemComMesmoNomeError";
 import PersonagemNaoEncontradoError from "../excecoes/PersonagemNaoEncontradoError";
 import Personagem from "../personagens/Personagem";
@@ -16,17 +18,26 @@ export default class Batalha {
         this._proximoIdAcao = 1;
         
     }
-
-    definirId(personagem: Personagem | Acao): void{
-        personagem.id = this._proximoIdPersonagem++;
-    }
-
+    
     /* ========== GETS E SETS ========== */
     get personagens(): Personagem[] {
         return this._personagens;
     }
 
+    get acoes(): Acao[] {
+        return this._acoes;
+    }
+    
     /* ========== MÉTODOS PRIVADOS ========== */
+    private definirId(objeto: Personagem | Acao): void{
+        if (objeto instanceof Personagem) {
+            objeto.id = this._proximoIdPersonagem++;
+        }
+        else {
+            objeto.id = this._proximoIdAcao++;
+        }
+    }
+
     consultarPersonagemPorId(id: number): Personagem{
         const personagem = this._personagens.find(p => p.id === id);
 
@@ -61,5 +72,38 @@ export default class Batalha {
         };
 
         return personagem;
+    }
+
+    turno(atacanteId: number, alvoId: number): Acao[]{
+        const atacante = this.consultarPersonagemPorId(atacanteId);
+        const alvo = this.consultarPersonagemPorId(alvoId);
+
+        const acao = atacante.atacar(alvo);
+        this.definirId(acao);
+        this._acoes.push(acao);
+
+        return [acao];
+    }
+
+    listarPersonagens(): Personagem[] {
+        return this._personagens;
+    }
+
+    listarAcoes(): Acao[] {
+        return this._acoes;
+    }
+
+    verificarVencedor(): Personagem {
+        const vivos = this._personagens.filter(personagem => personagem.estaVivo());
+
+        if (vivos.length > 1) {
+            throw new BatalhaNaoFinalizadaError(
+            "A batalha ainda não terminou. Não é possível determinar o vencedor.")
+        }
+        if (vivos.length === 0) {
+            throw new NaoHaVencedorError("Não há personagens vivos na batalha.")
+        }
+
+        return vivos[0]!;
     }
 }
