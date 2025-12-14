@@ -31,18 +31,13 @@ export default class Guerreiro extends Personagem {
 
     }
 
-    atacar(alvo: Personagem): Acao {
-        let dano = this.ataque;
+    calcularDano(): number {
         if (this.vida <= 100 * 0.3 ) {
-            dano *= 1.30;
+            return this.ataque * 1.30;
 
         }
-        alvo.receberDano(dano);
-
-        return new Acao(1,this, alvo,"Ataque do Guerreiro", dano);
+        return this.ataque;
 
     }
 
 } 
-
-
