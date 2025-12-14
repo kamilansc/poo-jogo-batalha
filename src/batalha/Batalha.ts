@@ -16,17 +16,26 @@ export default class Batalha {
         this._proximoIdAcao = 1;
         
     }
-
-    definirId(personagem: Personagem | Acao): void{
-        personagem.id = this._proximoIdPersonagem++;
-    }
-
+    
     /* ========== GETS E SETS ========== */
     get personagens(): Personagem[] {
         return this._personagens;
     }
 
+    get acoes(): Acao[] {
+        return this._acoes;
+    }
+    
     /* ========== MÉTODOS PRIVADOS ========== */
+    private definirId(objeto: Personagem | Acao): void{
+        if (objeto instanceof Personagem) {
+            objeto.id = this._proximoIdPersonagem++;
+        }
+        else {
+            objeto.id = this._proximoIdAcao++;
+        }
+    }
+
     consultarPersonagemPorId(id: number): Personagem{
         const personagem = this._personagens.find(p => p.id === id);
 
@@ -61,5 +70,16 @@ export default class Batalha {
         };
 
         return personagem;
+    }
+
+    turno(atacanteId: number, alvoId: number): Acao[]{
+        const atacante = this.consultarPersonagemPorId(atacanteId);
+        const alvo = this.consultarPersonagemPorId(alvoId);
+
+        const acao = atacante.atacar(alvo);
+        this.definirId(acao);
+        this._acoes.push(acao);
+
+        return [acao];
     }
 }
