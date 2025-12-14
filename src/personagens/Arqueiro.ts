@@ -9,14 +9,13 @@ export default class Arqueiro extends Personagem {
         this._ataqueMultiplo = ataqueMultiplo;
     }
 
-    atacar(alvo: Personagem): Acao {
-        let dano = this.ataque;
-        if (Math.random() > 0.5) {
-            dano = this.ataque * this._ataqueMultiplo;
-        }
-        
-        alvo.receberDano(dano)
+   calcularDano(): number {
 
-        return new Acao(1,this,alvo,"Ataque do Arqueiro", dano)
+        if (Math.random() > 0.5) {
+            return this.ataque * this._ataqueMultiplo;
+        }
+
+        return this.ataque
+
     }
 }
