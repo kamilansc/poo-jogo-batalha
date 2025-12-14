@@ -1,6 +1,7 @@
 import Acao from "../batalha/Acao";
 import PersonagemAutoataqueError from "../excecoes/PersonagemAutoataqueError";
 import PersonagemMortoError from "../excecoes/PersonagemMortoError";
+import ValorInvalidoError from "../excecoes/ValorInvalidoError";
 
 export default class Personagem {
     private _id: number;
@@ -10,9 +11,20 @@ export default class Personagem {
     private _historico: Acao[];
 
     constructor(id: number, nome: string, vida: number, ataque: number) {
+        if (typeof vida !== "number" || isNaN(vida)) {
+            throw new ValorInvalidoError("Valor inválido! O campo vida deve receber um número.");
+        }
+        if (vida <= 0 || vida > 100) {
+            throw new ValorInvalidoError("Valor inválido! Vida fora do intervalo permitido (1 até 100).");
+        }
+        
+        if (typeof ataque !== "number" || isNaN(ataque)) {
+            throw new ValorInvalidoError("Valor inválido! O campo ataque deve receber um número.");
+        }
+
         this._id = id;
         this._nome = nome;
-        this._vida = this.validarVida(vida);
+        this._vida = vida;
         this._ataque = ataque;
         this._historico = [];
     }
@@ -36,13 +48,6 @@ export default class Personagem {
 
     
     /* ======== FUNCIONALIDADES ======== */ 
-    validarVida(vida: number) {
-        if (vida >= 0 && vida <= 100) {
-            return vida;
-        }
-        throw new Error("Vida inválida");
-    }
-
     calcularDano(): number {
         return this._ataque;
     }
