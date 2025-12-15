@@ -38,4 +38,18 @@ export default class Acao {
     get id(): number {
         return this._id;
     }
+
+    get origem(): Personagem {
+        return this._origem;
+    }
+
+    get alvo(): Personagem {
+        return this._alvo;
+    }
+
+    get valorDano(): number {
+        return this._valorDano;
+    }
+
+
 }
