@@ -1,4 +1,4 @@
-
+import Batalha from "../batalha/Batalha";
 export function telaInicial() {
     console.log(`
     ╔════════════════════════════════════════════╗
@@ -113,20 +113,36 @@ export function telaListarPersonagensVazio() {
     `);
 }
 
+export function telaIniciarBatalhaConfirmacao(batalha: Batalha) {
+    const personagens = batalha.listarPersonagens();
+    const vivos = personagens.filter(p => p.estaVivo());
 
-export function telaIniciarBatalhaConfirmacao() {
+    // Se não tiver personagens vivos, dá um erro
+    if (vivos.length < 2) {
+        console.log(`
+        ╔════════════════════════════════════════════╗
+        ║  Não há personagens suficientes para a batalha. ║
+        ║  Crie pelo menos dois personagens.         ║
+        ╚════════════════════════════════════════════╝
+        `);
+        return;
+    }
+
+    // Exibe os personagens vivos para escolha
     console.log(`
     ╔════════════════════════════════════════════╗
     ║           ⚔️ INICIAR BATALHA ⚔️              ║
     ╠════════════════════════════════════════════╣
     ║                                            ║
-    ║  A Arena dos Reinos está prestes a abrir.  ║
-    ║                                            ║
     ║  Personagens disponíveis para a batalha:   ║
     ║                                            ║
-    ║  1) Thorgal   🛡️ Guerreiro   | ❤️ 100        ║
-    ║  2) Lyra      🔮 Mago        | ❤️ 100       ║
-    ║  3) Elandor   🏹 Arqueiro    | ❤️ 100       ║
+    `);
+
+    vivos.forEach((p, index) => {
+        console.log(`║  ${index + 1}) ${p.nome} | ❤️ ${p.vida}  ║`);
+    });
+
+    console.log(`
     ║                                            ║
     ║  Deseja iniciar a batalha agora?           ║
     ║                                            ║
@@ -136,6 +152,29 @@ export function telaIniciarBatalhaConfirmacao() {
     ╚════════════════════════════════════════════╝
     `);
 }
+
+// export function telaIniciarBatalhaConfirmacao() {
+//     console.log(`
+//     ╔════════════════════════════════════════════╗
+//     ║           ⚔️ INICIAR BATALHA ⚔️              ║
+//     ╠════════════════════════════════════════════╣
+//     ║                                            ║
+//     ║  A Arena dos Reinos está prestes a abrir.  ║
+//     ║                                            ║
+//     ║  Personagens disponíveis para a batalha:   ║
+//     ║                                            ║
+//     ║  1) Thorgal   🛡️ Guerreiro   | ❤️ 100        ║
+//     ║  2) Lyra      🔮 Mago        | ❤️ 100       ║
+//     ║  3) Elandor   🏹 Arqueiro    | ❤️ 100       ║
+//     ║                                            ║
+//     ║  Deseja iniciar a batalha agora?           ║
+//     ║                                            ║
+//     ║  [ 1 ] Sim                                 ║
+//     ║  [ 0 ] Cancelar                            ║
+//     ║                                            ║
+//     ╚════════════════════════════════════════════╝
+//     `);
+// }
 
 export function telaIniciarBatalhaErro() {
     console.log(`

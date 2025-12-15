@@ -5,7 +5,7 @@ import PersonagemMortoError from "../excecoes/PersonagemMortoError";
 import ValorInvalidoError from "../excecoes/ValorInvalidoError";
 
 export default class Personagem {
-    private _id!: number;
+    private _id: number | null = null;
     private _nome: string;
     private _vida: number;
     private _ataque: number;
@@ -51,14 +51,17 @@ export default class Personagem {
     }
 
     set id(id: number) {
-        if (this._id !== undefined) {
+        if (this._id !== null) {
             throw new IdJaExisteError("ID já definido.");
         }
 
         this._id = id;
     }
 
-    get id(): number {
+    get id(): number | null{
+        if (this._id === null) {
+            throw new Error ("ID ainda não definido");
+        }
         return this._id;
     }
 
