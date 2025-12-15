@@ -30,25 +30,25 @@ let batalha: Batalha | null;
 
 function criarPersonagem() {
     Tela.telaCriarPersonagemClasse();
-    const classe = readlineSync.question("Escolha a classe (1-3): ");
+    const classe = readlineSync.question("\t>> Escolha a classe (1-3): ");
 
     Tela.telaCriarPersonagemNome();
-    const nome = readlineSync.question("Digite o nome: ");
+    const nome = readlineSync.question("\t>> Digite o nome: ");
 
-    let vida = Number(readlineSync.question("Vida (1-100): "));
-    let ataque = Number(readlineSync.question("Ataque (1-100): "));
+    let vida = Number(readlineSync.question("\t>> Vida (1-100): "));
+    let ataque = Number(readlineSync.question("\t>> Ataque (1-100): "));
 
     let personagem: Personagem;
     try {
         if (classe === "1"){
-            const defesa = readlineSync.questionInt("Defesa: ");
+            const defesa = readlineSync.questionInt("\t>> Defesa: ");
             personagem = new Guerreiro(defesa, nome, vida, ataque);
         }
         else if (classe === "2") {
             personagem = new Mago(nome, vida, ataque);
         }
         else if (classe === "3"){
-            const ataqueMultiplo = readlineSync.questionInt("Ataque Múltiplo: ");
+            const ataqueMultiplo = readlineSync.questionInt("\t>> Ataque Múltiplo: ");
             personagem = new Arqueiro(nome, vida, ataque, ataqueMultiplo);
         }
         else {
@@ -56,13 +56,13 @@ function criarPersonagem() {
         }
     } catch (erro) {
         if (erro instanceof Error) {
-            console.log("Erro ao criar personagem:", erro.message);
+            console.log("❌ Erro ao criar personagem:", erro.message);
             return;
         }
     }
 
     Tela.telaConfirmarCriacao();
-    const confirmar = readlineSync.question("Confirmar (1-Sim, 0-Cancelar): ");
+    const confirmar = readlineSync.question("\t>> Confirmar (1-Sim, 0-Cancelar): ");
     if (confirmar !== "1") return;
 
     try {
@@ -88,12 +88,12 @@ function listarPersonagens() {
 
 function iniciarBatalha() {
     if (!batalha || personagens.length < 2) {
-        console.log("É necessário ter pelo menos 2 personagens para iniciar a batalha.");
+        console.log("\t⚠️ É necessário ter pelo menos 2 personagens para iniciar a batalha.");
         return;
     }
 
     Tela.telaIniciarBatalha();
-    const opcao = readlineSync.question("Escolha: ");
+    const opcao = readlineSync.question("\t>> Escolha: ");
     if (opcao !== "1") return;
 
     Tela.telaBatalhaIniciada();
@@ -102,21 +102,21 @@ function iniciarBatalha() {
     while (continua) {
         listarPersonagens();
         Tela.telaEscolherAtacante();
-        const atacanteNome = readlineSync.question("Digite o nome do atacante: ");
+        const atacanteNome = readlineSync.question("\t>> Digite o nome do atacante: ");
         Tela.telaEscolherAtacado();
-        const alvoNome = readlineSync.question("Digite o nome do atacado: ");
+        const alvoNome = readlineSync.question("\t>> Digite o nome do atacado: ");
 
         try {
             const atacante = batalha.consultarPersonagem(atacanteNome);
             const alvo = batalha.consultarPersonagem(alvoNome);
             const acoes = batalha.turno(atacante.id, alvo.id);
-            console.log("Ação realizada:");
-            acoes.forEach(a => console.log(`${a.origem.nome} atacou ${a.alvo.nome} causando ${a.valorDano} de dano.`));
+            console.log("\tAção realizada:");
+            acoes.forEach(a => console.log(`\t${a.origem.nome} atacou ${a.alvo.nome} causando ${a.valorDano} de dano.`));
 
             // Verificar vencedor
             try {
                 const vencedor = batalha.verificarVencedor();
-                console.log(`🏆 Vencedor: ${vencedor.nome}`);
+                console.log(`\t🏆 Vencedor: ${vencedor.nome}`);
                 continua = false;
                 Tela.telaFimBatalha();
             } catch (erro) {
@@ -127,7 +127,7 @@ function iniciarBatalha() {
             }
         } catch (erro) {
             if (erro instanceof Error) {
-                console.log("Erro ao efetuar ataque:", erro.message);
+                console.log("❌ Erro ao efetuar ataque:", erro.message);
             }
         }
     }
@@ -138,12 +138,12 @@ function main() {
     batalha = new Batalha(personagens);
 
     Tela.telaInicial();
-    readlineSync.question("Pressione ENTER para continuar...");
+    readlineSync.question("\tPressione ENTER para continuar...");
 
     let sair = false;
     while (!sair) {
         Tela.telaMenuPrincipal();
-        const escolha = readlineSync.question("Opção: ");
+        const escolha = readlineSync.question("\t>> Opcao: ");
 
         switch (escolha) {
             case "1":
@@ -154,6 +154,9 @@ function main() {
                 break;
             case "3":
                 iniciarBatalha();
+                break;
+            case "4":
+                Tela.telaCronicas(batalha.listarAcoes());
                 break;
             case "0":
                 sair = true;

@@ -1,3 +1,5 @@
+import Acao from "../batalha/Acao";
+
 // ===== TELA INICIAL =====
 export function telaInicial() {
     console.log(`
@@ -21,6 +23,7 @@ export function telaMenuPrincipal() {
         [1] Criar personagem
         [2] Listar personagens
         [3] Iniciar batalha
+        [4] Listar histórico
         [0] Sair
         ========================================
         Escolha uma opção:
@@ -151,4 +154,23 @@ export function telaFimJogo() {
             🏰 OBRIGADO POR JOGAR!
         ========================================
         `);
+}
+
+// ===== CRÔNICAS DA BATALHA =====
+export function telaCronicas(acoes: Acao[]) {
+    console.log(`
+        ========================================
+                📖 CRÔNICAS DA BATALHA
+        ========================================
+    `);
+    if (acoes.length === 0) {
+        console.log("\tNenhuma ação registrada.");
+    } else {
+        acoes.forEach((acao, index) => {
+            console.log(`${index + 1} - ${acao.origem.nome} atacou ${acao.alvo.nome} causando ${acao.valorDano} de dano.`);
+        });
+    }
+    console.log(`
+        ========================================
+    `);
 }

@@ -24,6 +24,11 @@ export default class PersonagemRepository {
     const dados = JSON.parse(conteudo);
 
     return dados.map((personagem: any) => {
+
+      if (personagem.vida <= 0) {
+        return null;
+      }
+
       let p: Personagem;
 
       switch (personagem.tipo) {
@@ -44,7 +49,8 @@ export default class PersonagemRepository {
       p["_id"] = personagem.id;
 
       return p;
-    });
+    })
+    .filter((p): p is Personagem => p !== null);
 }
 
 }

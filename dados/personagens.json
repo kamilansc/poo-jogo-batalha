@@ -9,10 +9,10 @@
   },
   {
     "id": 2,
-    "nome": "Mylena",
+    "nome": "maria",
     "vida": 0,
-    "ataque": 40,
-    "tipo": "Guerreiro",
-    "defesa": 0
+    "ataque": 20,
+    "tipo": "Arqueiro",
+    "ataqueMultiplo": 10
   }
 ]
