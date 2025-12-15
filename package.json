@@ -1,5 +1,9 @@
 {
   "devDependencies": {
-    "@types/node": "^25.0.2"
+    "@types/node": "^25.0.2",
+    "@types/readline-sync": "^1.4.8"
+  },
+  "dependencies": {
+    "readline-sync": "^1.4.10"
   }
 }

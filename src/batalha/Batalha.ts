@@ -14,9 +14,14 @@ export default class Batalha {
     constructor(personagens: Personagem[]) {
         this._personagens = personagens;
         this._acoes = [];
-        this._proximoIdPersonagem = 1;
+
+        // Se existirem personagens com ID, pega o maior ID + 1
+        const ids = personagens
+            .map(p => p["_id"])
+            .filter((id): id is number => id !== null); // remove null
+
+        this._proximoIdPersonagem = ids.length > 0 ? Math.max(...ids) + 1 : 1;
         this._proximoIdAcao = 1;
-        
     }
     
     /* ========== GETS E SETS ========== */

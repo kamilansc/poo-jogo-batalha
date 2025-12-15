@@ -10,7 +10,7 @@ import {
   telaIniciarBatalhaErro,
   telaBatalhaIniciada,
   telaEscolherAtacante,
-  telaEscolherAtacado, 
+  telaEscolherAtacado,
   telaCronicas
 } from "./Telas";
 
@@ -154,30 +154,58 @@ function listarPersonagens() {
 }
 
 function iniciarBatalha() {
-  console.clear();
-
-  const personagens = batalha.listarPersonagens();
-  const vivos = personagens.filter(p => p.estaVivo());
-
-  if (vivos.length < 2) {
-    telaIniciarBatalhaErro();
-    esperarEnter();
-    menuPrincipal();
-    return;
-  }
-  telaIniciarBatalhaConfirmacao();
-  const confirmar = lerNumero();
-
-  if (confirmar === 1) {
     console.clear();
-    telaBatalhaIniciada();
-    esperarEnter();
-    executarTurno();; 
-    return;
-  }
+    const personagens = batalha.listarPersonagens();
+    const vivos = personagens.filter(p => p.estaVivo());
 
-  menuPrincipal();
+    if (vivos.length < 2) {
+        telaIniciarBatalhaErro();
+        esperarEnter();
+        menuPrincipal();
+        return;
+    }
+
+    // Chama a tela de confirmação de batalha
+    telaIniciarBatalhaConfirmacao(batalha);
+
+    const confirmar = lerNumero();
+
+    if (confirmar === 1) {
+        console.clear();
+        telaBatalhaIniciada();
+        esperarEnter();
+        executarTurno(); // Começa a execução da batalha
+        return;
+    }
+
+    menuPrincipal();
 }
+
+// function iniciarBatalha() {
+//   console.clear();
+
+//   const personagens = batalha.listarPersonagens();
+//   const vivos = personagens.filter(p => p.estaVivo());
+
+//   if (vivos.length < 2) {
+//     telaIniciarBatalhaErro();
+//     esperarEnter();
+//     menuPrincipal();
+//     return;
+//   }
+//   telaIniciarBatalhaConfirmacao();
+//   const confirmar = lerNumero();
+
+//   if (confirmar === 1) {
+//     console.clear();
+//     telaBatalhaIniciada();
+//     esperarEnter();
+//     executarTurno();; 
+//     return;
+//   }
+
+//   menuPrincipal();
+// }
 
 function executarTurno() {
   console.clear();
@@ -202,7 +230,7 @@ function executarTurno() {
     } catch {
         console.log(`
     ╔════════════════════════════════════════════╗
-    ║            ☠️ FIM DA BATALHA                ║
+    ║            ☠️ FIM DA BATALHA               ║
     ╠════════════════════════════════════════════╣
     ║                                            ║
     ║  Nenhum personagem sobreviveu.             ║

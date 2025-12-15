@@ -24,16 +24,27 @@ export default class PersonagemRepository {
     const dados = JSON.parse(conteudo);
 
     return dados.map((personagem: any) => {
+      let p: Personagem;
+
       switch (personagem.tipo) {
         case "Guerreiro":
-          return new Guerreiro(personagem.defesa, personagem.nome, personagem.vida, personagem.ataque);
+          p = new Guerreiro(personagem.defesa, personagem.nome, personagem.vida, personagem.ataque);
+          break;
         case "Mago":
-          return new Mago(personagem.nome, personagem.vida, personagem.ataque);
-          case "Arqueiro":
-            return new Arqueiro(personagem.nome, personagem.vida, personagem.ataque, personagem.ataqueMultiplo);
+          p = new Mago(personagem.nome, personagem.vida, personagem.ataque);
+          break;
+        case "Arqueiro":
+          p = new Arqueiro(personagem.nome, personagem.vida, personagem.ataque, personagem.ataqueMultiplo);
+          break;
         default:
           throw new Error("Tipo de personagem desconhecido");
       }
+
+      // Restaurar o ID salvo no JSON
+      p["_id"] = personagem.id;
+
+      return p;
     });
-  }
+}
+
 }
