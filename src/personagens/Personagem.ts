@@ -59,7 +59,7 @@ export default class Personagem {
     }
 
     get id(): number {
-        return this._id;
+    return this._id;
     }
 
     
