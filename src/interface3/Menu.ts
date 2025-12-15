@@ -21,7 +21,7 @@ import NaoHaVencedorError from "../excecoes/NaoHaVencedorError";
 
 // Array global de personagens
 let personagens: Personagem[];
-let batalha: Batalha | null;
+let batalha: Batalha;
 
 function criarPersonagem() {
     Tela.telaCriarPersonagemClasse();
@@ -73,7 +73,7 @@ function criarPersonagem() {
 function listarPersonagens() {
     if (personagens.length === 0) {
         Tela.telaListarPersonagensVazio();
-        return;
+        return;''
     }
     Tela.telaListarPersonagens();
     for (const p of personagens) {
@@ -83,7 +83,7 @@ function listarPersonagens() {
 
 function iniciarBatalha() {
     if (!batalha || personagens.length < 2) {
-        console.log("\t⚠️ É necessário ter pelo menos 2 personagens para iniciar a batalha.");
+        console.log("\t⚠️ É necessário ter pelo menos 2 personagens para iniciar a batalha⚠️");
         return;
     }
 
