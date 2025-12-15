@@ -2,6 +2,9 @@ import readlineSync from "readline-sync";
 import Batalha from "../batalha/Batalha";
 import Personagem from "../personagens/Personagem";
 import Acao from "../batalha/Acao";
+import Guerreiro from "../personagens/Guerreiro";
+import Arqueiro from "../personagens/Arqueiro";
+import Mago from "../personagens/Mago";
 
 // Importar telas
 import * as Tela from "./Tela";
@@ -12,14 +15,6 @@ import PersonagemRepository from "../persistencia/PersonagemRepository";
 // Exceções
 import ValorInvalidoError from "../excecoes/ValorInvalidoError";
 import PersonagemComMesmoNomeError from "../excecoes/PersonagemComMesmoNomeError";
-/*
-import PersonagemNaoEncontradoError from "./excecoes/PersonagemNaoEncontradoError";
-import BatalhaNaoFinalizadaError from "./excecoes/BatalhaNaoFinalizadaError";
-import NaoHaVencedorError from "./excecoes/NaoHaVencedorError";
-*/
-import Guerreiro from "../personagens/Guerreiro";
-import Arqueiro from "../personagens/Arqueiro";
-import Mago from "../personagens/Mago";
 import BatalhaNaoFinalizadaError from "../excecoes/BatalhaNaoFinalizadaError";
 import NaoHaVencedorError from "../excecoes/NaoHaVencedorError";
 
