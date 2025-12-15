@@ -71,6 +71,7 @@ function criarPersonagem() {
 }
 
 function listarPersonagens() {
+    const personagens = batalha.listarPersonagens();
     if (personagens.length === 0) {
         Tela.telaListarPersonagensVazio();
         return;''

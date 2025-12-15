@@ -1,18 +1,10 @@
 [
   {
     "id": 1,
-    "nome": "Kamila",
-    "vida": 80,
-    "ataque": 40,
+    "nome": "jsjsk",
+    "vida": 2,
+    "ataque": 3,
     "tipo": "Guerreiro",
-    "defesa": 0
-  },
-  {
-    "id": 2,
-    "nome": "maria",
-    "vida": 0,
-    "ataque": 20,
-    "tipo": "Arqueiro",
-    "ataqueMultiplo": 10
+    "defesa": 1
   }
 ]
