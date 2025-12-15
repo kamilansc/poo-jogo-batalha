@@ -43,4 +43,11 @@ export default class Guerreiro extends Personagem {
 
     }
 
+    /* ======== MÉTODO PRA ADAPTAR O OBJETO PARA JSON ======== */ 
+    TransformarEmJson(): any{
+        return {
+            ...super.TransformarEmJson(), // ... serve para desmontar o retorno do metodo
+            defesa: this._defesa
+        };
+    }
 } 

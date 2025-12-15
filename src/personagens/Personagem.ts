@@ -112,4 +112,15 @@ export default class Personagem {
             console.log(acao);
         }
     }
+
+    /* ======== MÉTODO PRA ADAPTAR O OBJETO PARA JSON ======== */ 
+    TransformarEmJson(): any{
+        return {
+            id: this._id,
+            nome: this._nome,
+            vida: this._vida,
+            ataque: this._ataque,
+            tipo: this.constructor.name
+        };
+    }
 }
