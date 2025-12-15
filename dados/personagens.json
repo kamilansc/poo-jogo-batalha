@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": 1,
+    "nome": "Kamila",
+    "vida": 80,
+    "ataque": 40,
+    "tipo": "Guerreiro",
+    "defesa": 0
+  },
+  {
+    "id": 2,
+    "nome": "Mylena",
+    "vida": 0,
+    "ataque": 40,
+    "tipo": "Guerreiro",
+    "defesa": 0
+  }
+]
