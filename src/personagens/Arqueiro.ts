@@ -29,4 +29,12 @@ export default class Arqueiro extends Personagem {
 
     return this.ataque;
     }
+
+    /* ======== MÉTODO PRA ADAPTAR O OBJETO PARA JSON ======== */ 
+    TransformarEmJson(): any{
+        return {
+            ...super.TransformarEmJson(),
+            ataqueMultiplo: this._ataqueMultiplo
+        };
+    }
 }
