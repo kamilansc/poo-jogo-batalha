@@ -1,0 +1,23 @@
+[
+  {
+    "id": 2,
+    "nome": "Mylena",
+    "vida": 0,
+    "ataque": 100,
+    "tipo": "Letalis"
+  },
+  {
+    "id": 3,
+    "nome": "Kamila",
+    "vida": 90,
+    "ataque": 100,
+    "tipo": "Letalis"
+  },
+  {
+    "id": 4,
+    "nome": "Ely",
+    "vida": 0,
+    "ataque": 10,
+    "tipo": "Mago"
+  }
+]
