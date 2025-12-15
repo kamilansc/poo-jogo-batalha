@@ -21,7 +21,7 @@ import NaoHaVencedorError from "../excecoes/NaoHaVencedorError";
 
 // Array global de personagens
 let personagens: Personagem[];
-let batalha: Batalha | null;
+let batalha: Batalha | null; 
 
 function criarPersonagem() {
     Tela.telaCriarPersonagemClasse();
@@ -122,7 +122,7 @@ function iniciarBatalha() {
             }
         } catch (erro) {
             if (erro instanceof Error) {
-                console.log("❌ Erro ao efetuar ataque:", erro.message);
+                console.log("\t❌ Erro ao efetuar ataque:", erro.message);
             }
         }
     }
